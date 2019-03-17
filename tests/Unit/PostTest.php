@@ -22,4 +22,10 @@ class PostTest extends TestCase
         $this->assertTrue(array_key_exists('title', $postAttributes));
         $this->assertTrue(array_key_exists('content', $postAttributes));
     }
+
+    public function testPostsIndex()
+    {
+        $response = $this->get('/');
+        $response->assertSee('<div class="posts-index">');
+    }
 }
