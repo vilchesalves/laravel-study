@@ -14,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('index', [
+        return view('post.index', [
             'latestPosts' => Post::simplePaginate(3),
         ]);
     }
@@ -43,12 +43,14 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        //
+        return view('post.show', [
+            'post' => Post::find($id),
+        ]);
     }
 
     /**
