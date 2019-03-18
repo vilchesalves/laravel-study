@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Blog Blog! - @yield('title')</title>
+    <title>Blog Dashboard</title>
+    <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
-    <ul>
-        <li><a href="{{ route('post.index') }}">Home</a></li>
-        <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
-    </ul>
-    @yield('content')
+<div id="dashboard"></div>
+<script src="/js/app.js"></script>
 </body>
 </html>

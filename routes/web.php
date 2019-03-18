@@ -13,3 +13,5 @@
 
 Route::get('/', 'PostController@index')->name('post.index');
 Route::get('/post/show/{id}', 'PostController@show')->name('post.show');
+
+Route::view('/dashboard', 'dashboard')->name('dashboard');
