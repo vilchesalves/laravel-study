@@ -5,7 +5,7 @@
       v-bind:key="post.id"
     ><a
       v-bind:href="`/dashboard/edit/${post._id}`"
-      v-on:click="edit(post._id, $event)"
+      v-on:click.prevent="edit(post._id)"
     >
       {{ post.title }}
     </a></li>
@@ -16,20 +16,19 @@
 import axios from 'axios';
 
 export default {
-  data () {
+  data() {
     return {
       posts: [],
     }
   },
-  mounted () {
+  mounted() {
     axios('/api/v1/posts').then((response) => {
       this.posts = response.data.data;
     });
   },
   methods: {
-    edit (id, event) {
-      event.preventDefault();
-      console.log(id)
+    edit(id) {
+      this.$emit('edit', id);
     }
   }
 }
