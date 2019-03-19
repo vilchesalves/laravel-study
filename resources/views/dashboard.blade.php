@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="dashboard">
-    <menu-component></menu-component>
+    <root-component></root-component>
 </div>
 <script src="/js/app.js"></script>
 </body>
