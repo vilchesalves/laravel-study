@@ -86,4 +86,9 @@ class PostController extends Controller
     {
         //
     }
+
+    public function apiList()
+    {
+        return json_encode(Post::simplePaginate());
+    }
 }
