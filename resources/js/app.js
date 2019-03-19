@@ -1,3 +1,4 @@
+import rootComponent from './components/RootComponent.vue';
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -17,8 +18,8 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-const files = require.context('./', true, /\.vue$/i);
-files.keys().map(key => window.Vue.component(key.split('/').pop().split('.')[0], files(key).default));
+// const files = require.context('./', true, /\.vue$/i);
+// files.keys().map(key => window.Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -28,4 +29,7 @@ files.keys().map(key => window.Vue.component(key.split('/').pop().split('.')[0],
 
 window.dashboard = new window.Vue({
   el: '#dashboard',
+  components: {
+    rootComponent,
+  },
 });
