@@ -2,14 +2,14 @@
   <div>
     <menu-component />
     <list-component @edit="edit" />
-    <edit-post v-bind:id="editPost" />
+    <edit-post :id="editPost" />
   </div>
 </template>
 
 <script>
-import menuComponent from './MenuComponent';
-import listComponent from './ListComponent';
-import editPost from './EditPost';
+import menuComponent from './MenuComponent.vue';
+import listComponent from './ListComponent.vue';
+import editPost from './EditPost.vue';
 
 export default {
   data() {
@@ -25,7 +25,7 @@ export default {
   methods: {
     edit(id) {
       this.editPost = id;
-    }
+    },
   },
-}
+};
 </script>
