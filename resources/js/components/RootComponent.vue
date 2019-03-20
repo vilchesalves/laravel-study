@@ -1,10 +1,8 @@
 <template>
   <div>
-    <menu-component></menu-component>
-    <list-component
-      @edit="edit"
-    ></list-component>
-    <edit-post v-bind:id="editPost"></edit-post>
+    <menu-component />
+    <list-component @edit="edit" />
+    <edit-post v-bind:id="editPost" />
   </div>
 </template>
 

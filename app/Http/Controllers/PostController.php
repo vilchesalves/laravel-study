@@ -59,9 +59,15 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Request $request)
     {
-        //
+        $post = Post::find($request->post('id'));
+        $post->title = $request->post('title');
+        $post->content = $request->post('content');
+        $post->save();
+        return response()->json([
+            'status' => 'OK',
+        ]);
     }
 
     /**
@@ -90,5 +96,10 @@ class PostController extends Controller
     public function apiList()
     {
         return json_encode(Post::simplePaginate());
+    }
+
+    public function apiSingle($id)
+    {
+        return json_encode(Post::find($id));
     }
 }
