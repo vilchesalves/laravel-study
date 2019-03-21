@@ -14,6 +14,7 @@
       <textarea
         id="content"
         class="form-control"
+        rows="10"
         :value="content"
         @input="update('content', $event.target.value)"
       />
