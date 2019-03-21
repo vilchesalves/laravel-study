@@ -54,12 +54,12 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update the specified resource in storage.
      *
-     * @param  \App\Post  $post
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function update(Request $request)
     {
         $post = Post::find($request->post('id'));
         $post->title = $request->post('title');
@@ -68,18 +68,6 @@ class PostController extends Controller
         return response()->json([
             'status' => 'OK',
         ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Post $post)
-    {
-        //
     }
 
     /**
