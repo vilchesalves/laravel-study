@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <menu-component
       @list="list"
       @create="create"
