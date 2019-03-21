@@ -44,6 +44,7 @@
 
 <script>
 import axios from 'axios';
+import { formatPostError } from '../util';
 
 export default {
   data() {
@@ -62,7 +63,7 @@ export default {
       this.unsaved[field] = value;
     },
     cancel() {
-      this.$emit('update:createPost', '');
+      this.$emit('update:createPost', false);
     },
     save() {
       if (this.unsaved) {
@@ -76,22 +77,18 @@ export default {
             content,
           },
         })
-          .then((response) => {
-            console.log(response);
+          .then(() => {
             delete this.unsaved;
-            this.$emit('update:createPost', '');
+            this.$emit('update:createPost', false);
           })
           .catch(({ response: { data: { errors, message } } }) => {
-            let errorMessage = `${message}<br />`;
-            errors.title.forEach((singleTitle) => {
-              errorMessage += `${singleTitle}<br />`;
+            this.errorMessage = formatPostError({
+              message, errors,
             });
-
-            this.errorMessage = errorMessage;
 
             setTimeout(() => {
               this.errorMessage = '';
-            }, 10000);
+            }, 5000);
           });
       }
     },

@@ -19,6 +19,12 @@
         @input="update('content', $event.target.value)"
       />
     </div>
+    <div
+      v-if="errorMessage"
+      class="alert alert-info"
+      role="alert"
+      v-html="errorMessage"
+    />
     <div class="form-group d-flex justify-content-end">
       <button
         class="btn btn-primary"
@@ -44,6 +50,7 @@
 
 <script>
 import axios from 'axios';
+import { formatPostError } from '../util';
 
 export default {
   props: {
@@ -56,6 +63,7 @@ export default {
     return {
       title: '',
       content: '',
+      errorMessage: '',
     };
   },
   watch: {
@@ -96,7 +104,7 @@ export default {
       const { title, content } = this.unsaved;
 
       if (this.unsaved) {
-        await axios({
+        axios({
           method: 'post',
           url: '/api/v1/posts/update',
           data: {
@@ -104,10 +112,20 @@ export default {
             title,
             content,
           },
-        });
+        })
+          .then(() => {
+            delete this.unsaved;
+            this.$emit('update:id', '');
+          })
+          .catch(({ response: { data: { errors, message } } }) => {
+            this.errorMessage = formatPostError({
+              message, errors,
+            });
 
-        delete this.unsaved;
-        this.$emit('update:id', '');
+            setTimeout(() => {
+              this.errorMessage = '';
+            }, 5000);
+          });
       }
     },
     cancel() {
