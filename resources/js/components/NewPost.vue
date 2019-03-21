@@ -71,6 +71,7 @@ export default {
         });
 
         delete this.unsaved;
+        this.$emit('update:createPost', '');
       }
     },
   },

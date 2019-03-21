@@ -113,6 +113,24 @@ export default {
     cancel() {
       this.$emit('update:id', '');
     },
+    async destroy() {
+      // eslint-disable-next-line no-alert
+      const confirmDestruction = window.confirm('Confirm post destruction?');
+
+      if (confirmDestruction) {
+        const { id } = this;
+
+        await axios({
+          method: 'post',
+          url: '/api/v1/posts/destroy',
+          data: {
+            id,
+          },
+        });
+
+        this.$emit('update:id', '');
+      }
+    },
   },
 };
 </script>
