@@ -19,6 +19,12 @@
           @click.prevent="$emit('create')"
         >Create post</a>
       </li>
+      <li class="nav-item">
+        <a
+          href="/logout"
+          class="nav-link"
+        >Logout</a>
+      </li>
     </ul>
   </div>
 </template>
