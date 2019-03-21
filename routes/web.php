@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +16,11 @@
 Route::get('/', 'PostController@index')->name('post.index');
 Route::get('/post/show/{id}', 'PostController@show')->name('post.show');
 
-Route::view('/dashboard', 'dashboard')->name('dashboard');
+Route::get('/dashboard', function (Request $request) {
+    return view('dashboard', [
+        'currentUser' => $request->user(),
+    ]);
+})->middleware('auth')->name('dashboard');
 
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');

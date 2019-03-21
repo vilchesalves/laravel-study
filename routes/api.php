@@ -19,6 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/v1/posts', 'PostController@apiList');
 Route::get('/v1/posts/{id}', 'PostController@apiSingle');
-Route::post('/v1/posts/update', 'PostController@update');
-Route::post('/v1/posts/store', 'PostController@store');
-Route::post('/v1/posts/destroy', 'PostController@destroy');
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('/v1/posts/update', 'PostController@update');
+    Route::post('/v1/posts/store', 'PostController@store');
+    Route::post('/v1/posts/destroy', 'PostController@destroy');
+});
