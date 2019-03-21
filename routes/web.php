@@ -17,6 +17,7 @@ Route::get('/post/show/{id}', 'PostController@show')->name('post.show');
 Route::view('/dashboard', 'dashboard')->name('dashboard');
 
 Auth::routes();
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/home', function () {
     return redirect(route('post.index'));

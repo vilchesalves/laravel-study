@@ -10,6 +10,11 @@
     <ul>
         <li><a href="{{ route('post.index') }}">Home</a></li>
         <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+        @if (Auth::guest())
+            <li><a href="{{ route('login') }}">Login</a></li>
+        @else
+            <li><a href="{{ route('logout') }}">Logout</a></li>
+        @endif
     </ul>
     @yield('content')
 </body>
