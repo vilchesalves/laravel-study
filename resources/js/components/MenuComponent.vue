@@ -1,6 +1,9 @@
 <template>
   <div class="navbar navbar-expand-md">
-    <div class="navbar-brand" href="#">Blog!</div>
+    <a
+      class="navbar-brand"
+      href="/"
+    >Blog!</a>
     <ul class="navbar-nav">
       <li class="nav-item">
         <a
