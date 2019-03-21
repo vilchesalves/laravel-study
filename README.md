@@ -10,10 +10,11 @@
 2. run `composer install`;
 3. run `npm install`;
 4. run `npm run prod`;
-5. run `php artisan db:seed`;
-6. run `php artisan serve`.
+5. run `php artisan migrate`;
+6. run `php artisan db:seed`;
+7. run `php artisan serve`.
 
-The blog should be running at http://localhost:8000 and an admin is available.
+The blog should be running at http://localhost:8000 and an admin user is available.
 
 # credentials
 
@@ -35,10 +36,11 @@ The initial page displays a list of the posts. The admin user can select any of 
 # next features to be included
 
 - a better design for the displayed posts;
-- implement an unit test suite for the dashboard;
-- post comments;
+- enable markdown text for the posts;
+- implement an unit test suite for the js dashboard;
+- comment section for the posts;
 - post filtering for the dashboard;
-- a post search;
+- a search functionality;
 - tags and categories.
 
 And this list could go on forever, right? :)
