@@ -1,7 +1,6 @@
 <template>
-  <div v-if="currentId">
+  <div v-if="id">
     <input
-      v-if="title"
       :value="title"
       @input="update('title', $event.target.value)"
     >
@@ -30,26 +29,36 @@ export default {
   },
   data() {
     return {
-      currentId: this.id,
       title: '',
       content: '',
     };
   },
-  async beforeUpdate() {
+  watch: {
+    id(newId, oldId) {
+      if (newId !== oldId) {
+        this.loadContent({ id: newId });
+      }
+    },
+  },
+  mounted() {
     if (this.id) {
+      this.loadContent({ id: this.id });
+    }
+  },
+  methods: {
+    async loadContent({ id }) {
       const {
         data: {
           title,
           content,
         },
-      } = await axios(`/api/v1/posts/${this.id}`);
+      } = await axios(`/api/v1/posts/${id}`);
 
       this.title = title;
       this.content = content;
+
       delete this.unsaved;
-    }
-  },
-  methods: {
+    },
     update(field, value) {
       this.unsaved = this.unsaved || {
         title: this.title,
@@ -58,7 +67,7 @@ export default {
       this.unsaved[field] = value;
     },
     async save() {
-      const { currentId: id } = this;
+      const { id } = this;
       const { title, content } = this.unsaved;
 
       if (this.unsaved) {
@@ -73,11 +82,11 @@ export default {
         });
 
         delete this.unsaved;
-        this.currentId = '';
+        this.$emit('update:id', '');
       }
     },
     cancel() {
-      this.currentId = '';
+      this.$emit('update:id', '');
     },
   },
 };

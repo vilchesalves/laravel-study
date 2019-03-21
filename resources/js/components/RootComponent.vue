@@ -11,7 +11,10 @@
       v-else
       @edit="edit"
     />
-    <edit-post :id="editPost" />
+    <edit-post
+      v-if="editPost !== ''"
+      :id.sync="editPost"
+    />
   </div>
 </template>
 
