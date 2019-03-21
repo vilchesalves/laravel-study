@@ -27,10 +27,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+
         $post = new Post;
-        $post->title = $request->post('title');
-        $post->content = $request->post('content');
+        $post->title = $validatedData['title'];
+        $post->content = $validatedData['content'];
         $post->save();
+
         return response()->json([
             'status' => 'OK',
         ]);

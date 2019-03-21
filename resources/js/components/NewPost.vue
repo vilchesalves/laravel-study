@@ -19,6 +19,12 @@
         @input="update('content', $event.target.value)"
       />
     </div>
+    <div
+      v-if="errorMessage"
+      class="alert alert-info"
+      role="alert"
+      v-html="errorMessage"
+    />
     <div class="form-group d-flex justify-content-end">
       <button
         class="btn btn-primary"
@@ -44,6 +50,7 @@ export default {
     return {
       title: '',
       content: '',
+      errorMessage: '',
     };
   },
   methods: {
@@ -57,21 +64,35 @@ export default {
     cancel() {
       this.$emit('update:createPost', '');
     },
-    async save() {
-      const { title, content } = this.unsaved;
-
+    save() {
       if (this.unsaved) {
-        await axios({
+        const { title, content } = this.unsaved;
+
+        axios({
           method: 'post',
           url: '/api/v1/posts/store',
           data: {
             title,
             content,
           },
-        });
+        })
+          .then((response) => {
+            console.log(response);
+            delete this.unsaved;
+            this.$emit('update:createPost', '');
+          })
+          .catch(({ response: { data: { errors, message } } }) => {
+            let errorMessage = `${message}<br />`;
+            errors.title.forEach((singleTitle) => {
+              errorMessage += `${singleTitle}<br />`;
+            });
 
-        delete this.unsaved;
-        this.$emit('update:createPost', '');
+            this.errorMessage = errorMessage;
+
+            setTimeout(() => {
+              this.errorMessage = '';
+            }, 10000);
+          });
       }
     },
   },
