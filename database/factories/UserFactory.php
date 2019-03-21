@@ -26,7 +26,7 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
-$factory->state(App\User::class, 'admin', [
+$factory->state(User::class, 'admin', [
     'email' => 'admin@example.com',
     'password' => Hash::make('admin'),
 ]);
