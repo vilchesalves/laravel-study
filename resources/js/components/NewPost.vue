@@ -1,20 +1,38 @@
 <template>
-  <div>
-    <input
-      :value="title"
-      @input="update('title', $event.target.value)"
-    >
-    <textarea
-      :value="content"
-      @input="update('content', $event.target.value)"
-    />
-    <button @click="save">
-      Save
-    </button>
-    <button @click="$emit('cancel')">
-      Cancel
-    </button>
-  </div>
+  <form>
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input
+        id="title"
+        class="form-control"
+        :value="title"
+        @input="update('title', $event.target.value)"
+      >
+    </div>
+    <div class="form-group">
+      <label for="content">Content:</label>
+      <textarea
+        id="content"
+        class="form-control"
+        :value="content"
+        @input="update('content', $event.target.value)"
+      />
+    </div>
+    <div class="form-group d-flex justify-content-end">
+      <button
+        class="btn btn-primary"
+        @click.prevent="save"
+      >
+        Save
+      </button>
+      <button
+        class="btn btn-light"
+        @click.prevent="cancel"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
 </template>
 
 <script>
@@ -34,6 +52,9 @@ export default {
         content: this.content,
       };
       this.unsaved[field] = value;
+    },
+    cancel() {
+      this.$emit('update:createPost', '');
     },
     async save() {
       const { title, content } = this.unsaved;
