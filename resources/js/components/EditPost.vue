@@ -1,18 +1,18 @@
 <template>
-  <div v-if="id">
+  <div v-if="currentId">
     <input
       v-if="title"
       :value="title"
-      @:input="update('title', $event.target.value)"
+      @input="update('title', $event.target.value)"
     >
     <textarea
       :value="content"
-      @:input="update('content', $event.target.value)"
+      @input="update('content', $event.target.value)"
     />
-    <button @:click="save">
+    <button @click="save">
       Save
     </button>
-    <button @:click="cancel">
+    <button @click="cancel">
       Cancel
     </button>
   </div>
@@ -30,6 +30,7 @@ export default {
   },
   data() {
     return {
+      currentId: this.id,
       title: '',
       content: '',
     };
@@ -57,13 +58,13 @@ export default {
       this.unsaved[field] = value;
     },
     async save() {
-      const { id } = this;
+      const { currentId: id } = this;
       const { title, content } = this.unsaved;
 
       if (this.unsaved) {
         await axios({
           method: 'post',
-          url: '/api/v1/posts/edit',
+          url: '/api/v1/posts/update',
           data: {
             id,
             title,
@@ -72,11 +73,11 @@ export default {
         });
 
         delete this.unsaved;
-        this.id = '';
+        this.currentId = '';
       }
     },
     cancel() {
-      this.id = '';
+      this.currentId = '';
     },
   },
 };

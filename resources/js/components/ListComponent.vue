@@ -6,7 +6,7 @@
     >
       <a
         :href="`/dashboard/edit/${post._id}`"
-        @:click.prevent="edit(post._id)"
+        @click.prevent="edit(post._id)"
       >
         {{ post.title }}
       </a>
@@ -23,10 +23,13 @@ export default {
       posts: [],
     };
   },
-  mounted() {
-    axios('/api/v1/posts').then((response) => {
-      this.posts = response.data.data;
-    });
+  async mounted() {
+    const {
+      data: {
+        data: posts,
+      },
+    } = await axios('/api/v1/posts');
+    this.posts = posts;
   },
   methods: {
     edit(id) {
