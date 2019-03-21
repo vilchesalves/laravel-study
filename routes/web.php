@@ -24,7 +24,3 @@ Route::get('/dashboard', function (Request $request) {
 
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
-Route::get('/home', function () {
-    return redirect(route('post.index'));
-})->name('home');
