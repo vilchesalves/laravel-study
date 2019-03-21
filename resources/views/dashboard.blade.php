@@ -8,9 +8,7 @@
     <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
-<div id="dashboard">
-    <root-component></root-component>
-</div>
+<div id="dashboard"></div>
 <script src="/js/app.js"></script>
 </body>
 </html>

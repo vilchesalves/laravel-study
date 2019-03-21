@@ -29,6 +29,7 @@ window.Vue = require('vue');
 
 window.dashboard = new window.Vue({
   el: '#dashboard',
+  template: '<root-component></root-component>',
   components: {
     rootComponent,
   },
