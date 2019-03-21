@@ -66,31 +66,29 @@ export default {
       this.$emit('update:createPost', false);
     },
     save() {
-      if (this.unsaved) {
-        const { title, content } = this.unsaved;
+      const { title, content } = this.unsaved || {};
 
-        axios({
-          method: 'post',
-          url: '/api/v1/posts/store',
-          data: {
-            title,
-            content,
-          },
+      axios({
+        method: 'post',
+        url: '/api/v1/posts/store',
+        data: {
+          title,
+          content,
+        },
+      })
+        .then(() => {
+          delete this.unsaved;
+          this.$emit('update:createPost', false);
         })
-          .then(() => {
-            delete this.unsaved;
-            this.$emit('update:createPost', false);
-          })
-          .catch(({ response: { data: { errors, message } } }) => {
-            this.errorMessage = formatPostError({
-              message, errors,
-            });
-
-            setTimeout(() => {
-              this.errorMessage = '';
-            }, 5000);
+        .catch(({ response: { data: { errors, message } } }) => {
+          this.errorMessage = formatPostError({
+            message, errors,
           });
-      }
+
+          setTimeout(() => {
+            this.errorMessage = '';
+          }, 5000);
+        });
     },
   },
 };
