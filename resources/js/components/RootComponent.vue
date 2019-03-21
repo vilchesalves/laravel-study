@@ -6,14 +6,15 @@
     />
     <new-post
       v-if="createPost"
+      :create-post.sync="createPost"
+    />
+    <edit-post
+      v-else-if="editPost"
+      :id.sync="editPost"
     />
     <list-component
       v-else
       @edit="edit"
-    />
-    <edit-post
-      v-if="editPost !== ''"
-      :id.sync="editPost"
     />
   </div>
 </template>
