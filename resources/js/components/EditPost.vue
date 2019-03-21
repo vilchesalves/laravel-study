@@ -1,20 +1,44 @@
 <template>
-  <div v-if="id">
-    <input
-      :value="title"
-      @input="update('title', $event.target.value)"
-    >
-    <textarea
-      :value="content"
-      @input="update('content', $event.target.value)"
-    />
-    <button @click="save">
-      Save
-    </button>
-    <button @click="cancel">
-      Cancel
-    </button>
-  </div>
+  <form v-if="id">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input
+        id="title"
+        class="form-control"
+        :value="title"
+        @input="update('title', $event.target.value)"
+      >
+    </div>
+    <div class="form-group">
+      <label for="content">Content:</label>
+      <textarea
+        id="content"
+        class="form-control"
+        :value="content"
+        @input="update('content', $event.target.value)"
+      />
+    </div>
+    <div class="form-group d-flex justify-content-end">
+      <button
+        class="btn btn-primary"
+        @click.prevent="save"
+      >
+        Save
+      </button>
+      <button
+        class="btn btn-light"
+        @click.prevent="cancel"
+      >
+        Cancel
+      </button>
+      <button
+        class="btn btn-danger"
+        @click.prevent="destroy"
+      >
+        Destroy
+      </button>
+    </div>
+  </form>
 </template>
 
 <script>
