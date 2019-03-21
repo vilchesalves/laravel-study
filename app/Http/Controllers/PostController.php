@@ -15,7 +15,7 @@ class PostController extends Controller
     public function index()
     {
         return view('post.index', [
-            'latestPosts' => Post::simplePaginate(3),
+            'latestPosts' => Post::orderBy('created_at', 'desc')->simplePaginate(3),
         ]);
     }
 
@@ -79,7 +79,7 @@ class PostController extends Controller
 
     public function apiList()
     {
-        return json_encode(Post::simplePaginate());
+        return json_encode(Post::orderBy('created_at', 'desc')->simplePaginate());
     }
 
     public function apiSingle($id)
