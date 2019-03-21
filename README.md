@@ -33,14 +33,15 @@ It is a small Vue.js application that manages the posts through the Laravel API 
 
 The initial page displays a list of the posts. The admin user can select any of them in order to edit or delete it. On the header there is a "create post" button that allows the user to create a new post.
 
-# next features to be included
+# possible roadmap
 
-- a better design for the displayed posts;
+- a better design for the posts;
 - enable markdown text for the posts;
 - implement an unit test suite for the js dashboard;
 - comment section for the posts;
 - post filtering for the dashboard;
 - a search functionality;
-- tags and categories.
+- tags and categories;
+- use slugs as the post url identifier.
 
 And this list could go on forever, right? :)
