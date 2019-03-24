@@ -62,8 +62,11 @@ export default {
       };
       this.unsaved[field] = value;
     },
+    backToDashboard() {
+      this.$router.push({ name: 'dashboard' });
+    },
     cancel() {
-      this.$emit('update:createPost', false);
+      this.backToDashboard();
     },
     save() {
       const { title, content } = this.unsaved || {};
@@ -78,7 +81,7 @@ export default {
       })
         .then(() => {
           delete this.unsaved;
-          this.$emit('update:createPost', false);
+          this.backToDashboard();
         })
         .catch(({ response: { data: { errors, message } } }) => {
           this.errorMessage = formatPostError({

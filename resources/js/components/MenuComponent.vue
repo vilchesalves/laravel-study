@@ -3,27 +3,33 @@
     <a
       class="navbar-brand"
       href="/"
-    >Blog!</a>
+    >
+      Blog!
+    </a>
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a
-          href="#"
+        <router-link
+          to="/dashboard"
           class="nav-link"
-          @click.prevent="$emit('list')"
-        >List posts</a>
+        >
+          List posts
+        </router-link>
       </li>
       <li class="nav-item">
-        <a
-          href="#"
+        <router-link
+          to="/dashboard/new"
           class="nav-link"
-          @click.prevent="$emit('create')"
-        >Create post</a>
+        >
+          Create post
+        </router-link>
       </li>
       <li class="nav-item">
         <a
           href="/logout"
           class="nav-link"
-        >Logout</a>
+        >
+          Logout
+        </a>
       </li>
     </ul>
   </div>

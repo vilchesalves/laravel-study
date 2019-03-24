@@ -5,12 +5,11 @@
         v-for="post in posts"
         :key="post.id"
       >
-        <a
-          :href="`/dashboard/edit/${post._id}`"
-          @click.prevent="edit(post._id)"
+        <router-link
+          :to="`/dashboard/edit/${post._id}`"
         >
           {{ post.title }}
-        </a>
+        </router-link>
       </li>
     </ul>
     <button
@@ -56,9 +55,6 @@ export default {
     this.prevPageUrl = prevPageUrl;
   },
   methods: {
-    edit(id) {
-      this.$emit('edit', id);
-    },
     async load(url) {
       const {
         data: {

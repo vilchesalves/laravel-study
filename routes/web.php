@@ -16,11 +16,11 @@ use Illuminate\Http\Request;
 Route::get('/', 'PostController@index')->name('post.index');
 Route::get('/posts/{id}', 'PostController@show')->name('post.show');
 
-Route::get('/dashboard', function (Request $request) {
+Route::get('/dashboard{wildcard?}', function (Request $request) {
     return view('dashboard', [
         'currentUser' => $request->user(),
     ]);
-})->middleware('auth')->name('dashboard');
+})->middleware('auth')->name('dashboard')->where('wildcard', '.*');
 
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');

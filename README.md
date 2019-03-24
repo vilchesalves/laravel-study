@@ -35,8 +35,8 @@ The initial page displays a list of the posts. The admin user can select any of 
 
 # possible roadmap
 
-- routing for the dashboard;
-- a better design for the posts;
+- ~~routing for the dashboard~~;
+- ~~a better design for the posts~~;
 - enable markdown text for the posts;
 - implement an unit test suite for the js dashboard;
 - comment section for the posts;

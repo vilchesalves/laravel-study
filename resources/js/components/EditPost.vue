@@ -1,5 +1,5 @@
 <template>
-  <form v-if="id">
+  <form v-if="$route.params.id">
     <div class="form-group">
       <label for="title">Title:</label>
       <input
@@ -53,29 +53,19 @@ import axios from 'axios';
 import { formatPostError } from '../util';
 
 export default {
-  props: {
-    id: {
-      type: String,
-      default: '',
-    },
-  },
   data() {
     return {
+      id: '',
       title: '',
       content: '',
       errorMessage: '',
     };
   },
-  watch: {
-    id(newId, oldId) {
-      if (newId !== oldId) {
-        this.loadContent({ id: newId });
-      }
-    },
-  },
   mounted() {
-    if (this.id) {
-      this.loadContent({ id: this.id });
+    const { id } = this.$route.params;
+
+    if (id) {
+      this.loadContent({ id });
     }
   },
   methods: {
@@ -87,10 +77,14 @@ export default {
         },
       } = await axios(`/api/v1/posts/${id}`);
 
+      this.id = id;
       this.title = title;
       this.content = content;
 
       delete this.unsaved;
+    },
+    backToDashboard() {
+      this.$router.push({ name: 'dashboard' });
     },
     update(field, value) {
       this.unsaved = this.unsaved || {
@@ -115,7 +109,7 @@ export default {
         })
           .then(() => {
             delete this.unsaved;
-            this.$emit('update:id', '');
+            this.backToDashboard();
           })
           .catch(({ response: { data: { errors, message } } }) => {
             this.errorMessage = formatPostError({
@@ -129,7 +123,7 @@ export default {
       }
     },
     cancel() {
-      this.$emit('update:id', '');
+      this.backToDashboard();
     },
     async destroy() {
       // eslint-disable-next-line no-alert
@@ -146,7 +140,7 @@ export default {
           },
         });
 
-        this.$emit('update:id', '');
+        this.backToDashboard();
       }
     },
   },
